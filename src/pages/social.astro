@@ -1,0 +1,149 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Social Media | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>📱 Social Media Galaxy</h1>
+			<div class="social-grid">
+				<a 
+					href="https://www.instagram.com/sahil.a.sawant"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="social-card instagram"
+				>
+					<div class="profile-preview">
+						<div class="profile-avatar"></div>
+						<div class="profile-info">
+							<div class="profile-name">@sahil.a.sawant</div>
+							<div class="profile-text">Follow on Instagram</div>
+						</div>
+					</div>
+				</a>
+
+				<a 
+					href="https://github.com/Sahil-at-Work/Sahil-at-Work"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="social-card github"
+				>
+					<div class="profile-preview">
+						<div class="profile-avatar"></div>
+						<div class="profile-info">
+							<div class="profile-name">Sahil-at-Work</div>
+							<div class="profile-text">Follow on GitHub</div>
+						</div>
+					</div>
+				</a>
+
+				<a 
+					href="https://in.linkedin.com/in/sahil-sawant-its-31aug"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="social-card linkedin"
+				>
+					<div class="profile-preview">
+						<div class="profile-avatar"></div>
+						<div class="profile-info">
+							<div class="profile-name">Sahil Sawant</div>
+							<div class="profile-text">Connect on LinkedIn</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.social-grid {
+		display: grid;
+		gap: 2rem;
+		max-width: 540px;
+		margin: 2rem auto;
+	}
+
+	.social-card {
+		background: white;
+		border-radius: 12px;
+		box-shadow: var(--box-shadow);
+		padding: 1rem;
+		text-decoration: none;
+		color: inherit;
+		transition: transform 0.2s ease;
+	}
+
+	.social-card:hover {
+		transform: translateY(-4px);
+	}
+
+	.profile-preview {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.5rem;
+	}
+
+	.profile-avatar {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background-color: #F4F4F4;
+	}
+
+	.profile-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.profile-name {
+		font-weight: bold;
+		color: #262626;
+	}
+
+	.profile-text {
+		color: #737373;
+		font-size: 0.9rem;
+	}
+
+	.instagram:hover {
+		background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+		color: white;
+	}
+
+	.instagram:hover .profile-name,
+	.instagram:hover .profile-text {
+		color: white;
+	}
+
+	.github:hover {
+		background: #24292e;
+		color: white;
+	}
+
+	.github:hover .profile-name,
+	.github:hover .profile-text {
+		color: white;
+	}
+
+	.linkedin:hover {
+		background: #0077b5;
+		color: white;
+	}
+
+	.linkedin:hover .profile-name,
+	.linkedin:hover .profile-text {
+		color: white;
+	}
+</style>

@@ -1,0 +1,223 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import readingTime from 'reading-time';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const content = await Astro.slots.render('default');
+const stats = readingTime(content);
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 2em;
+				color: #E2E8F0;
+				background: rgba(15, 23, 42, 0.8);
+				border-radius: 16px;
+				border: 1px solid rgba(139, 92, 246, 0.2);
+				box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+			}
+			.title {
+				margin-bottom: 2em;
+				padding: 1em 0;
+				text-align: center;
+				line-height: 1;
+				border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+			}
+			.title h1 {
+				margin: 0 0 0.5em 0;
+				background: linear-gradient(45deg, #8B5CF6, #6D28D9);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+			}
+			.date {
+				margin-bottom: 0.5em;
+				color: #94A3B8;
+				font-size: 0.9em;
+			}
+			.last-updated-on {
+				font-style: italic;
+				color: #94A3B8;
+			}
+			.reading-time {
+				font-size: 0.9em;
+				color: #94A3B8;
+				margin-top: 0.5em;
+			}
+			.table-of-contents {
+				background: rgba(30, 41, 59, 0.5);
+				padding: 1.5em;
+				border-radius: 8px;
+				margin: 2em 0;
+				border: 1px solid rgba(139, 92, 246, 0.2);
+			}
+			.table-of-contents h2 {
+				margin-top: 0;
+				font-size: 1.25em;
+				color: #F8FAFC;
+				margin-bottom: 1em;
+			}
+			.table-of-contents ul {
+				margin: 0;
+				padding: 0 0 0 1.5em;
+				list-style-type: none;
+			}
+			.table-of-contents li {
+				margin: 0.5em 0;
+				position: relative;
+			}
+			.table-of-contents li::before {
+				content: '•';
+				color: #8B5CF6;
+				position: absolute;
+				left: -1em;
+			}
+			.table-of-contents a {
+				color: #E2E8F0;
+				text-decoration: none;
+				transition: all 0.3s ease;
+				display: inline-block;
+			}
+			.table-of-contents a:hover {
+				color: #8B5CF6;
+				transform: translateX(4px);
+			}
+			.share-buttons {
+				display: flex;
+				gap: 1em;
+				margin: 2em 0;
+				justify-content: center;
+			}
+			.share-button {
+				padding: 0.75em 1.5em;
+				border-radius: 8px;
+				color: #F8FAFC;
+				text-decoration: none;
+				font-size: 0.9em;
+				transition: all 0.3s ease;
+				display: flex;
+				align-items: center;
+				gap: 0.5em;
+				border: 1px solid rgba(139, 92, 246, 0.2);
+			}
+			.share-button:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+			}
+			.twitter {
+				background: rgba(29, 161, 242, 0.2);
+			}
+			.twitter:hover {
+				background: rgba(29, 161, 242, 0.3);
+			}
+			.linkedin {
+				background: rgba(10, 102, 194, 0.2);
+			}
+			.linkedin:hover {
+				background: rgba(10, 102, 194, 0.3);
+			}
+			
+			@media (max-width: 720px) {
+				.prose {
+					padding: 1em;
+				}
+				.title {
+					margin-bottom: 1em;
+				}
+				.share-buttons {
+					flex-direction: column;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="title">
+						<div class="date">
+							<FormattedDate date={pubDate} />
+							{
+								updatedDate && (
+									<div class="last-updated-on">
+										Last updated on <FormattedDate date={updatedDate} />
+									</div>
+								)
+							}
+							<div class="reading-time">
+								{stats.text}
+							</div>
+						</div>
+						<h1>{title}</h1>
+					</div>
+
+					<div class="table-of-contents">
+						<h2>Table of Contents</h2>
+						<ul>
+							{
+								content.match(/<h[2-3][^>]*>(.*?)<\/h[2-3]>/g)?.map(heading => {
+									const text = heading.replace(/<[^>]+>/g, '');
+									const slug = text.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+									return <li><a href={`#${slug}`}>{text}</a></li>;
+								})
+							}
+						</ul>
+					</div>
+
+					<slot />
+
+					<div class="share-buttons">
+						<a 
+							href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(Astro.url)}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="share-button twitter"
+						>
+							Share on Twitter
+						</a>
+						<a 
+							href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url)}&title=${encodeURIComponent(title)}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="share-button linkedin"
+						>
+							Share on LinkedIn
+						</a>
+					</div>
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

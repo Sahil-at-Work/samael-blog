@@ -1,0 +1,126 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.image-gallery {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+				gap: 10px;
+				margin-top: 20px;
+			}
+
+			.image-gallery img {
+				width: 100%;
+				height: auto;
+				border-radius: 5px;
+				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Samael Starshine</h1>
+			<p>
+				Hey, friend. Welcome to my introduction page. I'm <strong
+					>Sahil Ashok Sawant</strong
+				>, and I'm all about diving deep into the fascinating world of technology and
+				engineering.
+			</p>
+			<p>
+				You see, I'm an <strong
+					>Electronics and Telecommunication Engineer</strong
+				> on my way to earning my <strong
+					>Bachelor's in Technology (B.Tech) Degree</strong
+				>. I've got a diverse skill set that helps me navigate through complex circuits,
+				troubleshoot technical issues, and design robust electronic solutions.
+			</p>
+			<p>
+				But that's not all. As a <strong
+					>Python Developer</strong
+				>, I've gone down the rabbit hole of <strong
+					>Cybersecurity</strong
+				>. I've crafted some pretty slick software tools like PortScanner and Ennumeration
+				Tool to keep those lurking threats at bay. And when it comes to problem-solving,
+				I've conquered my fair share of <strong
+					>LEETCODE</strong
+				> challenges, earning myself a respectable rank of 74,386. Yeah, I know my stuff.
+			</p>
+			<p>
+				Now, let's talk <strong
+					>Automation Engineering</strong
+				>. I've got a comprehensive understanding of Internet of Things and Hardware
+				Systems. I've taken on some pretty cool projects for <strong
+					>State-Level and Intercollege Competitions</strong
+				>. Armed with Microcontrollers and Microprocessors, I've created some seriously
+				Innovative Solutions that seamlessly integrate with our Physical World. You could
+				say I've got a knack for automating tasks and boosting efficiency.
+			</p>
+			<p>
+				Oh, and don't get me started on <strong
+					>Computer Networks</strong
+				>, I'm a true enthusiast in that area. I've delved deep into the intricacies of
+				<strong
+					>Client-Server Communication</strong
+				> and the fascinating realm of <strong
+					>Virtual Machines</strong
+				>. Through my projects, I've gained hands-on experience in designing and
+				implementing Network Architectures, ensuring smooth data flow and efficient system
+				interactions.
+			</p>
+
+			<h3>My Digital Gallery</h3>
+			<div class="image-gallery">
+				<img src="/images/gallery/image1.jpg" alt="Image 1 Description" />
+				<img src="/images/gallery/project2.png" alt="Project 2 Showcase" />
+				<img src="/images/gallery/circuit-board.jpeg" alt="Electronics Project" />
+				<img src="/images/gallery/network-diagram.svg" alt="Network Architecture" />
+				{/* Add more images here */}
+			</div>
+
+			<p>
+				So join me on this Epic Journey, <strong
+					>My Friend</strong
+				>. Together, we'll combine my passion for <strong
+					>Python Development</strong
+				>, <strong
+					>Automation Engineering</strong
+				>, <strong
+					>Computer Networks</strong
+				>, <strong
+					>Electronics and Telecommunication</strong
+				>, and <strong
+					>Web development</strong
+				>, just like a secret alliance against <strong
+					>EVIL CORP</strong
+				>. As we delve into the depths of technology, we'll uncover the endless
+				possibilities that lie within, breaking free from the clutches of corporate control
+				and <strong
+					>embracing a future where Innovation and Creativity Reign Supreme</strong
+				>. Get ready to <strong
+					>Join The Resistance</strong
+				> and defy the dominance of EVIL CORP as we shape a world where technology
+				serves the people and empowers us all.
+			</p>
+			<p>
+				Thanks for dropping by, and get ready for a wild ride. Mr. Robot ain't got nothin'
+				on us.
+			</p>
+			<p>Warm regards,</p>
+			<p>Sahil Ashok Sawant<br />(aka. Samael Starshine)</p>
+			<p>
+				Thank you for venturing into the recesses of my digital existence. Embrace the
+				unknown, for only then will you truly see.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>
